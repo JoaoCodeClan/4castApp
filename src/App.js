@@ -11,39 +11,37 @@ class App extends React.Component {
 
 // const geolocation=;
 state={
-  city: undefined,
-  country: null,
   weather: null,
   geolocation:null,
   isLoading:false,
   error:null
 }
 
+  getWeather=async(e)=>{
+
+    e.preventDefault();
+
+    const city=e.target.elements.city.value;
+
+    const country=e.target.elements.country.value;
+
+    const weatherURL=`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${weatherApi_key}&units=Metric`;
 
 
-getWeather(e){
-  e.preventDefault();
+    fetch(weatherURL).then(res=>{
+      if(res.ok){
+        return res.json();
+      }else{
+        throw Error("Error retrieving weather data");
+      }
+    }).then(weatherRes=>{
+      console.log(weatherRes)
+      this.setState({weather:weatherRes})
+    })
+  }
 
-  let city=e.target.elements.city.value;
-  let country=e.target.elements.country.value;
-
-  const weatherURL=`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city},${this.state.country}&appid=${weatherApi_key}&units=Metric`;
-
-
-
-  fetch(weatherURL).then(res=>{
-    if(res.ok){
-      return res.json();
-    }else{
-      throw Error("Error retrieving weather data");
-    }
-  }).then(weatherRes=>{
-    this.setState({weather:weatherRes})
-  })
-}
-
-getGeoLoc(){}
-createResultTable(){}
+  getGeoLoc(){}
+  createResultTable(){}
 
 
 
