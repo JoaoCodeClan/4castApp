@@ -3,6 +3,7 @@ import './App.css';
 
 
 const weatherApi_key="d1169d1918f632fcc4c5ca02b739acf9";
+const googleKey= "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBUU2lMUxhERixvV19bfd-yJyefPQckUJQ";
 
 
 class App extends React.Component {
