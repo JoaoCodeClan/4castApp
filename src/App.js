@@ -1,9 +1,30 @@
 import React from 'react';
 import './App.css';
 
-class App extends React.Component {
 
-state={}
+const weatherApi_key="d1169d1918f632fcc4c5ca02b739acf9";
+
+
+class App extends React.Component {
+const weatherURL=`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${weatherApi_key}&units=Metric`;
+
+const geolocation=;
+state={
+  city: null,
+  country: null,
+  weather: null,
+  geolocation:null,
+  isLoading:false,
+  error:null
+}
+
+getWeather(){
+
+
+
+}
+getGeoLoc(){}
+createResultTable(){}
 
  render(){
    return(
