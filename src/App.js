@@ -7,9 +7,8 @@ const googleKey= "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSy
 
 
 class App extends React.Component {
-const weatherURL=`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${weatherApi_key}&units=Metric`;
 
-const geolocation=;
+// const geolocation=;
 state={
   city: null,
   country: null,
@@ -22,6 +21,16 @@ state={
 getWeather(){
 
 
+const weatherURL=`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city},${this.state.country}&appid=${weatherApi_key}&units=Metric`;
+fetch(weatherURL).then(res=>{
+  if(res.ok){
+    return res.json();
+  }else{
+    throw Error("Error retrieving weather data");
+  }
+}).then(weatherRes=>{
+  this.setState({weather:weatherRes})
+})
 
 }
 getGeoLoc(){}
@@ -30,7 +39,11 @@ createResultTable(){}
  render(){
    return(
      <div>
-     <h1> HI this is a test</h1>
+      <form >
+        <input type="text" name="city" placeholder="City"/>
+        <input type="text" name="country" placeholder="Country"/>
+        <button id="submit" >Get Events</button>
+      </form>
 
      </div>
 
