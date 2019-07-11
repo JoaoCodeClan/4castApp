@@ -1,9 +1,7 @@
 import React from "react";
 
 
-const SearchBox =(props)=>{
-
-    return(
+const SearchBox =(props)=>(
        <form onSubmit={props.getWeather} >
          <input type="text" name="city" placeholder="City" />
          <input type="text" name="country" placeholder="Country"/>
@@ -12,7 +10,7 @@ const SearchBox =(props)=>{
        </form>
 
        )
-  }
+
 
 
 

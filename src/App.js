@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBox from"./components/SearchBox";
 import Error from"./components/Error";
 import Title from"./components/Title";
-// import ResultTable from"./components/ResultTable";
+import ResultTable from"./components/ResultTable";
 import './App.css';
 
 
@@ -86,7 +86,7 @@ state={
      <div>
      <Title/>
      <SearchBox getWeather={this.getWeather} />
-    {/*<ResultTable/>*/}
+     <ResultTable forecast={this.state.forecast} description={this.state.description} temperature={this.state.temperature} humidity={this.state.humidity}/>
      <Error error={this.state.error}/>
 
 
