@@ -43,13 +43,14 @@ state={
         return res.json();
 
       }else{
-        throw Error("Error retrieving weather data");
-        // this.setState({error: "Error retrieving weather data"});
+        // throw Error("Error retrieving weather data");
+        this.setState({error: "Error retrieving weather data"});
       }
     }).then(weatherRes=>{
       console.log(weatherRes)
       this.setState({weather:weatherRes})
       this.setState({error: ""});
+      this.updateStateFromWeather();
     }).catch(error=>{
       this.setState({error: error.message})
     })
@@ -58,13 +59,14 @@ state={
       if(res.ok){
         return res.json();
       }else{
-        throw Error("Error retrieving weather data");
-        // this.setState({error: "Error retrieving weather data"});
+        // throw Error("Error retrieving weather data");
+        this.setState({error: "Error retrieving weather data"});
       }
     }).then(weatherRes=>{
       console.log(weatherRes)
       this.setState({weather:weatherRes})
       this.setState({error: ""});
+      this.updateStateFromWeather();
     }).catch(error=>{
       this.setState({error: error.message})
     })
@@ -72,6 +74,27 @@ state={
     this.setState({error: "Please enter a city"})
 
   }
+
+  }
+
+  updateStateFromWeather(){
+    const weatherjson= this.state.weather;
+
+    const forecastAPI= weatherjson.weather[0].main;
+    const descriptionAPI= weatherjson.weather[0].description;
+    const tempAPI= weatherjson.main.temp;
+    const humidityAPI= weatherjson.main.humidity;
+
+  this.setState({
+    forecast: forecastAPI,
+    description: descriptionAPI,
+    temperature: tempAPI,
+    humidity:humidityAPI
+  })
+
+
+
+
 
   }
 
