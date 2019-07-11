@@ -2,6 +2,7 @@ import React from "react";
 
 
 const ResultTable= (props)=>(
+  
   <table>
     <tbody>
         <tr>

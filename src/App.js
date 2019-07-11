@@ -109,7 +109,9 @@ state={
      <div>
      <Title/>
      <SearchBox getWeather={this.getWeather} />
-     <ResultTable forecast={this.state.forecast} description={this.state.description} temperature={this.state.temperature} humidity={this.state.humidity}/>
+
+     { this.state.forecast ? <ResultTable forecast={this.state.forecast} description={this.state.description} temperature={this.state.temperature} humidity={this.state.humidity}/> : null }
+
      <Error error={this.state.error}/>
 
 
