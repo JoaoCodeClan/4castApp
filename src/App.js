@@ -27,13 +27,16 @@ state={
   error:undefined
 }
 
-  getWeather=async(e)=>{
+  getWeather=async(data)=>{
     this.setState({error: ""});
-    e.preventDefault();
+  {/* e.preventDefault();*/} 
 
-    const city=e.target.elements.city.value;
+    const city= data.cityValue;
+    const country= data.countryvalue;
 
-    const country=e.target.elements.country.value;
+    {/*const city=e.target.elements.city.value;*/}
+
+    {/*const country=e.target.elements.country.value;*/}
 
     const weatherURL=`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${weatherApi_key}&units=Metric`;
     const weatherURL1=`http://apiopenweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi_key}&units=Metric`;
@@ -91,16 +94,11 @@ state={
     description: descriptionAPI,
     temperature: tempAPI,
     humidity:humidityAPI
-  })
-
-
-
-
-
+    })
   }
 
   getGeoLoc(){}
-  createResultTable(){}
+
 
 
 
@@ -110,7 +108,7 @@ state={
      <div>
      <Title/>
      <div className="searchBoxDiv">
-     <SearchBox getWeather={this.getWeather} />
+     <SearchBox getWeather={this.getWeather}/>
      {this.state.city ? null : <AroundMe/>}
      </div>
 
