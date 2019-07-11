@@ -14,6 +14,12 @@ class App extends React.Component {
 
 // const geolocation=;
 state={
+  city: undefined,
+  country: undefined,
+  forecast: undefined,
+  description: undefined,
+  temperature: undefined,
+  humidity: undefined,
   weather: null,
   geolocation:null,
   isLoading:false,
@@ -80,7 +86,7 @@ state={
      <div>
      <Title/>
      <SearchBox getWeather={this.getWeather} />
-    {/*<ResultTable/>*/} 
+    {/*<ResultTable/>*/}
      <Error error={this.state.error}/>
 
 
