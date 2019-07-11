@@ -1,6 +1,8 @@
 import React from 'react';
 import SearchBox from"./components/SearchBox";
 import Error from"./components/Error";
+import Title from"./components/Title";
+// import ResultTable from"./components/ResultTable";
 import './App.css';
 
 
@@ -63,11 +65,7 @@ state={
   }else{
     this.setState({error: "Please enter a city"})
 
-
   }
-
-
-
 
   }
 
@@ -80,8 +78,11 @@ state={
  render(){
    return(
      <div>
+     <Title/>
      <SearchBox getWeather={this.getWeather} />
+    {/*<ResultTable/>*/} 
      <Error error={this.state.error}/>
+
 
 
      </div>

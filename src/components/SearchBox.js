@@ -26,8 +26,7 @@ class SearchBox extends React.Component{
   // }
 
   render(){
-    return(<div>
-      <h1>4Cast</h1>
+    return(<div>    
        <form onSubmit={this.props.getWeather} >
          <input type="text" name="city" placeholder="City" />
          <input type="text" name="country" placeholder="Country"/>
