@@ -3,6 +3,7 @@ import SearchBox from"./components/SearchBox";
 import Error from"./components/Error";
 import Title from"./components/Title";
 import ResultTable from"./components/ResultTable";
+import AroundMe from "./components/AroundMe";
 import './App.css';
 
 
@@ -108,11 +109,15 @@ state={
    return(
      <div>
      <Title/>
+     <div className="searchBoxDiv">
      <SearchBox getWeather={this.getWeather} />
+     {this.state.city ? null : <AroundMe/>}
+     </div>
 
+     <div className="Result&ErrorDiv">
      { this.state.forecast ? <ResultTable forecast={this.state.forecast} description={this.state.description} temperature={this.state.temperature} humidity={this.state.humidity}/> : null }
-
      <Error error={this.state.error}/>
+     </div>
 
 
 
