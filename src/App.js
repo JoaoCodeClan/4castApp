@@ -84,23 +84,25 @@ updateStateFromWeather(){
     })
   }
 
-  getGeoLoc(event){
+  getGeoLoc=(event)=>{
+      event.preventDefault();
+      console.log(event)
 
-    // if(navigator.geolocation){
-    //     navigator.geolocation.getCurrentPosition(function(position) {
-    //       const location = {
-    //         lat: position.coords.latitude,
-    //         lng: position.coords.longitude
-    //       };
-    //       console.log(location);
-    //
-    //     }.bind(this), function() {
-    //       alert('Not able to find your location');
-    //     });
-    //   }
-    //   else{
-    //     alert('You do not have geolocation available on your device');
-    //   }
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const location = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          console.log(location);
+
+        }.bind(this), function() {
+          alert('Not able to find your location');
+        });
+      }
+      else{
+        alert('You do not have geolocation available on your device');
+      }
 
   }
 
