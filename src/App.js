@@ -33,7 +33,7 @@ state={
 
     const serverURL= `/weather/${city}/${country}/${weatherApi_key}`;
     const serverURL1= `/weather/${city}/${weatherApi_key}`;
-    console.log(serverURL1);
+
 
 if(city&&country){
   const weatherReq= await fetch(serverURL).then(res=>{
@@ -57,7 +57,6 @@ if(city&&country){
                this.setState({error: "Error retrieving weather data"});
              }
            }).then(weatherRes=>{
-             console.log(weatherRes)
              this.setState({weather:weatherRes})
              this.setState({error: ""});
              this.updateStateFromWeather();

@@ -10,19 +10,17 @@ constructor(props){
 }
 changeCityValue=(event)=>{
   this.setState({cityValue: event.target.value })
-  console.log("city from box"+event.target.value)
+
 }
 
 changeCountryValue=(event)=>{
   this.setState({countryValue: event.target.value })
-  console.log("country from box"+event.target.value)
+
 }
 
 handleSubmit =(event)=>{
   event.preventDefault();
   const data= this.state;
-  console.log(data)
-  console.log(this.state)
   this.props.getWeather(data);
 
 
