@@ -30,6 +30,19 @@ server.get('/weather/:city/:weatherApi_key', function(req,res){
 });
 
 
+server.get('/weather/:lat/:long/:weatherApi_key', function(req,res){
+  const weatherURLLatLong=`http://api.openweathermap.org/data/2.5/weather?lat=${req.params.lat}&lon=${req.params.long}&appid=${req.params.weatherApi_key}&units=Metric`;
+    request(weatherURLLatLong, function(error, response, body) {
+          if(error) {
+            res.status(500);
+            res.send();
+            return;
+          }
+          res.send(body);
+        });
+});
+
+
 
 
 server.listen(port,()=>console.log(`Server started on port${port}`));
