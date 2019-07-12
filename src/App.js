@@ -10,9 +10,7 @@ import './App.css';
 const weatherApi_key="d1169d1918f632fcc4c5ca02b739acf9";
 
 
-// TODO make error handling
 class App extends React.Component {
-
 
 state={
   city: undefined,
@@ -33,8 +31,8 @@ state={
 
     const country= data.countryValue;
 
-    const serverURL= `/${city}/${country}/${weatherApi_key}`;
-    const serverURL1= `/${city}/${weatherApi_key}`;
+    const serverURL= `/weather/${city}/${country}/${weatherApi_key}`;
+    const serverURL1= `/weather/${city}/${weatherApi_key}`;
     console.log(serverURL1);
 
 if(city&&country){
@@ -68,68 +66,8 @@ if(city&&country){
            });
 }else{
   this.setState({error: "Please enter a city"})
+ }
 }
-  }
-           // else{
-           //   this.setState({error: "Please enter a city"})
-           // }
-
-    //      try{
-    //        if(weatherReqData){
-    //              console.log(weatherReqData)
-    //              this.setState({weather:weatherReqData})
-    //              this.setState({error: ""});
-    //              this.updateStateFromWeather();
-    //            }else{
-    //              this.setState({error: "Weather Request Error"})
-    //            }
-    //      }catch(error){
-    //              this.setState({error: error.message})
-    //            };
-    //
-    // }else{
-    //   this.setState({error: "Please enter a city"})
-    // }
-    //
-    //
-    //
-    // then(res=>{
-      //     if(res.ok){
-      //       return res.json();
-      //
-      //     }else{
-      //       //
-      //       this.setState({error: "Error retrieving weather data"});
-      //     }
-      //   }).then(weatherRes=>{
-      //     console.log(weatherRes)
-      //     this.setState({weather:weatherRes})
-      //     this.setState({error: ""});
-      //     this.updateStateFromWeather();
-      //   }).catch(error=>{
-      //     this.setState({error: error.message})
-      //   })
-
-    // if(data){
-    //      const weatherReq= await fetch(`/:${city}/:${country}/:${weatherApi_key}`);
-    //      let weatherReqData = await weatherReq.json();
-    //      try{
-    //        if(weatherReqData){
-    //              console.log(weatherReqData)
-    //              this.setState({weather:weatherReqData})
-    //              this.setState({error: ""});
-    //              this.updateStateFromWeather();
-    //            }else{
-    //              this.setState({error: "Weather Request Error"})
-    //            }
-    //      }catch(error){
-    //              this.setState({error: error.message})
-    //            };
-    //
-    // }else{
-    //   this.setState({error: "Please enter a city"})
-    // }
-
 
 updateStateFromWeather(){
     const weatherjson= this.state.weather;
