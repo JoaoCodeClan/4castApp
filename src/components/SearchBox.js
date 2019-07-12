@@ -9,7 +9,10 @@ constructor(props){
   }
 }
 changeCityValue=(event)=>{
-  this.setState({cityValue: event.target.value })
+  event.preventDefault();
+  let value = event.target.value;
+  this.setState({cityValue: event.target.value });
+  this.props.updateCity(value);
 
 }
 

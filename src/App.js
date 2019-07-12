@@ -84,19 +84,40 @@ updateStateFromWeather(){
     })
   }
 
-  getGeoLoc(){}
+  getGeoLoc(event){
 
+    // if(navigator.geolocation){
+    //     navigator.geolocation.getCurrentPosition(function(position) {
+    //       const location = {
+    //         lat: position.coords.latitude,
+    //         lng: position.coords.longitude
+    //       };
+    //       console.log(location);
+    //
+    //     }.bind(this), function() {
+    //       alert('Not able to find your location');
+    //     });
+    //   }
+    //   else{
+    //     alert('You do not have geolocation available on your device');
+    //   }
 
+  }
+
+updateCity=(cityName)=>{
+  this.setState({city: cityName});
+}
 
 
 
  render(){
+
    return(
      <div>
      <Title/>
      <div className="searchBoxDiv">
-     <SearchBox getWeather={this.getWeather}/>
-     {this.state.city ? null : <AroundMe/>}
+     <SearchBox getWeather={this.getWeather} updateCity={this.updateCity}/>
+     {this.state.city ? null : <AroundMe findLocation={this.getGeoLoc}/>}
      </div>
 
      <div className="Result&ErrorDiv">

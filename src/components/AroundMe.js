@@ -2,7 +2,7 @@ import React from "react";
 
 
 const AroundMe =props=>(
-  <button id="aroundMe">Around me</button>
+  <button id="aroundMe" onClick={props.getGeoLoc}>Around me</button>
 
 
 
