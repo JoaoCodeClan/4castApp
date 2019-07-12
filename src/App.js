@@ -29,20 +29,15 @@ state={
 
   getWeather=async(data)=>{
     this.setState({error: ""});
-  {/* e.preventDefault();*/} 
 
     const city= data.cityValue;
     const country= data.countryvalue;
-
-    {/*const city=e.target.elements.city.value;*/}
-
-    {/*const country=e.target.elements.country.value;*/}
 
     const weatherURL=`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${weatherApi_key}&units=Metric`;
     const weatherURL1=`http://apiopenweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi_key}&units=Metric`;
 
     if(city&&country){
-    fetch(weatherURL).then(res=>{
+     fetch(weatherURL).then(res=>{
       if(res.ok){
         return res.json();
 
@@ -59,7 +54,7 @@ state={
       this.setState({error: error.message})
     })
   }else if(city && !country){
-    fetch(weatherURL1).then(res=>{
+     fetch(weatherURL1).then(res=>{
       if(res.ok){
         return res.json();
       }else{
