@@ -8,12 +8,12 @@ import './App.css';
 
 
 const weatherApi_key="d1169d1918f632fcc4c5ca02b739acf9";
-const googleKey= "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBUU2lMUxhERixvV19bfd-yJyefPQckUJQ";
+
 
 // TODO make error handling
 class App extends React.Component {
 
-// const geolocation=;
+
 state={
   city: undefined,
   country: undefined,
@@ -29,54 +29,109 @@ state={
 
   getWeather=async(data)=>{
     this.setState({error: ""});
-
     const city= data.cityValue;
-    const country= data.countryvalue;
 
-    const weatherURL=`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${weatherApi_key}&units=Metric`;
-    const weatherURL1=`http://apiopenweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApi_key}&units=Metric`;
+    const country= data.countryValue;
 
-    if(city&&country){
-     fetch(weatherURL).then(res=>{
-      if(res.ok){
-        return res.json();
+    const serverURL= `/${city}/${country}/${weatherApi_key}`;
+    const serverURL1= `/${city}/${weatherApi_key}`;
+    console.log(serverURL1);
 
-      }else{
-        // throw Error("Error retrieving weather data");
-        this.setState({error: "Error retrieving weather data"});
-      }
-    }).then(weatherRes=>{
-      console.log(weatherRes)
-      this.setState({weather:weatherRes})
-      this.setState({error: ""});
-      this.updateStateFromWeather();
-    }).catch(error=>{
-      this.setState({error: error.message})
-    })
-  }else if(city && !country){
-     fetch(weatherURL1).then(res=>{
-      if(res.ok){
-        return res.json();
-      }else{
-        // throw Error("Error retrieving weather data");
-        this.setState({error: "Error retrieving weather data"});
-      }
-    }).then(weatherRes=>{
-      console.log(weatherRes)
-      this.setState({weather:weatherRes})
-      this.setState({error: ""});
-      this.updateStateFromWeather();
-    }).catch(error=>{
-      this.setState({error: error.message})
-    })
-  }else{
-    this.setState({error: "Please enter a city"})
-
+if(city&&country){
+  const weatherReq= await fetch(serverURL).then(res=>{
+             if(res.ok){
+               return res.json();
+             }else{
+               this.setState({error: "Error retrieving weather data"});
+             }
+           }).then(weatherRes=>{
+             this.setState({weather:weatherRes})
+             this.setState({error: ""});
+             this.updateStateFromWeather();
+           }).catch(error=>{
+             this.setState({error: error.message})
+           });
+}else if(city && !country){
+  const weatherReq= await fetch(serverURL1).then(res=>{
+             if(res.ok){
+                return res.json();
+             }else{
+               this.setState({error: "Error retrieving weather data"});
+             }
+           }).then(weatherRes=>{
+             console.log(weatherRes)
+             this.setState({weather:weatherRes})
+             this.setState({error: ""});
+             this.updateStateFromWeather();
+           }).catch(error=>{
+             this.setState({error: error.message})
+           });
+}else{
+  this.setState({error: "Please enter a city"})
+}
   }
+           // else{
+           //   this.setState({error: "Please enter a city"})
+           // }
 
-  }
+    //      try{
+    //        if(weatherReqData){
+    //              console.log(weatherReqData)
+    //              this.setState({weather:weatherReqData})
+    //              this.setState({error: ""});
+    //              this.updateStateFromWeather();
+    //            }else{
+    //              this.setState({error: "Weather Request Error"})
+    //            }
+    //      }catch(error){
+    //              this.setState({error: error.message})
+    //            };
+    //
+    // }else{
+    //   this.setState({error: "Please enter a city"})
+    // }
+    //
+    //
+    //
+    // then(res=>{
+      //     if(res.ok){
+      //       return res.json();
+      //
+      //     }else{
+      //       //
+      //       this.setState({error: "Error retrieving weather data"});
+      //     }
+      //   }).then(weatherRes=>{
+      //     console.log(weatherRes)
+      //     this.setState({weather:weatherRes})
+      //     this.setState({error: ""});
+      //     this.updateStateFromWeather();
+      //   }).catch(error=>{
+      //     this.setState({error: error.message})
+      //   })
 
-  updateStateFromWeather(){
+    // if(data){
+    //      const weatherReq= await fetch(`/:${city}/:${country}/:${weatherApi_key}`);
+    //      let weatherReqData = await weatherReq.json();
+    //      try{
+    //        if(weatherReqData){
+    //              console.log(weatherReqData)
+    //              this.setState({weather:weatherReqData})
+    //              this.setState({error: ""});
+    //              this.updateStateFromWeather();
+    //            }else{
+    //              this.setState({error: "Weather Request Error"})
+    //            }
+    //      }catch(error){
+    //              this.setState({error: error.message})
+    //            };
+    //
+    // }else{
+    //   this.setState({error: "Please enter a city"})
+    // }
+
+
+updateStateFromWeather(){
     const weatherjson= this.state.weather;
 
     const forecastAPI= weatherjson.weather[0].main;
