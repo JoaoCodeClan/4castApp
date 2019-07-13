@@ -137,27 +137,28 @@ getGeoWeather=async()=>{
 }
 
  render(){
-
    return(
      <div>
-     <Title/>
-     <div className="searchBoxDiv">
-     <SearchBox getWeather={this.getWeather} updateCity={this.updateCity}/>
-     {this.state.city ? null : <AroundMe findLocation={this.getGeoLoc}/>}
+         <div id="title-container">
+            <Title/>
+         </div>
+         <div id="image-container">
+             <div className="searchBoxDiv">
+                  <SearchBox getWeather={this.getWeather} updateCity={this.updateCity}/>
+             </div>
+
+             <div id="aroundMecontainer">
+                  {this.state.city ? null : <AroundMe findLocation={this.getGeoLoc}/>}
+             </div>
+
+             <div id="Result-container">
+                  { this.state.forecast ? <ResultTable forecast={this.state.forecast} description={this.state.description} temperature={this.state.temperature} humidity={this.state.humidity}/> : null }
+                  <Error error={this.state.error}/>
+             </div>
+         </div>
+
      </div>
-
-     <div className="Result&ErrorDiv">
-     { this.state.forecast ? <ResultTable forecast={this.state.forecast} description={this.state.description} temperature={this.state.temperature} humidity={this.state.humidity}/> : null }
-     <Error error={this.state.error}/>
-     </div>
-
-
-
-     </div>
-
-
    );
-
  }
 
 
