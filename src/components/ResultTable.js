@@ -1,24 +1,25 @@
 import React from "react";
+import '../App.css';
 
 
 const ResultTable= (props)=>(
-  
+
   <table>
     <tbody>
         <tr>
-            <td>Forecast</td>
+            <td className="table-headings">Forecast</td>
             <td>{props.forecast}</td>
         </tr>
         <tr>
-            <td>Description </td>
+            <td className="table-headings">Description </td>
             <td>{props.description}</td>
         </tr>
         <tr>
-            <td>Temperature</td>
+            <td className="table-headings">Temperature</td>
             <td>{props.temperature}</td>
         </tr>
         <tr>
-            <td>Humidity</td>
+            <td className="table-headings">Humidity</td>
             <td>{props.humidity}</td>
         </tr>
     </tbody>

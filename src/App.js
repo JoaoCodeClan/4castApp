@@ -1,6 +1,5 @@
 import React from 'react';
 import Unsplash from 'unsplash-js';
-// const Unsplash = require('unsplash-js').default;
 import SearchBox from"./components/SearchBox";
 import Error from"./components/Error";
 import Title from"./components/Title";
@@ -53,7 +52,7 @@ if(city&&country){
              this.updateStateFromWeather();
              this.getRandomBackground();
            }).catch(error=>{
-             this.setState({error: error.message})
+             this.setState({error: "Error collecting data: "+error.message})
            });
 }else if(city && !country){
   const weatherReq= await fetch(serverURL1).then(res=>{
@@ -68,7 +67,7 @@ if(city&&country){
              this.updateStateFromWeather();
              this.getRandomBackground();
            }).catch(error=>{
-             this.setState({error: error.message})
+             this.setState({error: "Error collecting data: "+error.message})
            });
 }else{
   this.setState({error: "Please enter a city"})
@@ -138,16 +137,14 @@ getGeoWeather=async()=>{
             this.updateStateFromWeather();
             this.getRandomBackground();
           }).catch(error=>{
-            this.setState({error: error.message})
+            this.setState({error: "Error collecting data: "+error.message})
           });
 }
 
 
 
 getRandomBackground=async()=>{
-  const keyWord = this.state.forecast;
-  const imageURL= `/photos/random/${keyWord}`;
-
+  const keyWord = `${this.state.forecast} weather`;
          unsplash.photos.getRandomPhoto({ query: keyWord })
            .then(res=>{
              if(res.ok){
@@ -156,17 +153,14 @@ getRandomBackground=async()=>{
            })
            .then(imageRes => {
              const url= imageRes.urls.regular;
-             const style={
+             const style ={
                backgroundImage: `url(${url})`
+
              }
              this.setState({style: style})
            }).catch(error=>{
-                  this.setState({error: error.message})
+                  this.setState({error: "Error collecting data: "+error.message})
                 });
-
-
-
-
 }
 
 
@@ -175,11 +169,11 @@ getRandomBackground=async()=>{
  render(){
 
    return(
-     <div>
+     <div id="content-container" style ={this.state.style}>
          <div id="title-container">
             <Title/>
          </div>
-         <div id="image-container" style ={this.state.style}>
+         <div id="image-container" >
              <div id="searchBoxDiv">
                   <SearchBox getWeather={this.getWeather} updateCity={this.updateCity}/>
              </div>
