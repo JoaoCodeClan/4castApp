@@ -132,9 +132,37 @@ getGeoWeather=async()=>{
           }).catch(error=>{
             this.setState({error: error.message})
           });
+}
+
+
+
+getRandomBackground=async()=>{
+
+
+  const keyWord = this.state.forecast;
+  const imageURL= `/photos/random/${keyWord}`;
+
+  const imageReq= await fetch(imageURL).then(res=>{
+           if(res.ok){
+              return res.json();
+
+           }else{
+             this.setState({error: "Error retrieving weather data"});
+           }
+         }).then(imageRes=>{
+           // return imageRes;
+           console.log(imageRes);
+         }).catch(error=>{
+           this.setState({error: error.message})
+         });
+
+
+
+
 
 
 }
+
 
  render(){
    return(
