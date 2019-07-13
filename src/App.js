@@ -68,7 +68,7 @@ if(city&&country){
  }
 }
 
-updateStateFromWeather(){
+updateStateFromWeather=()=>{
     const weatherjson= this.state.weather;
 
     const forecastAPI= weatherjson.weather[0].main;
@@ -84,18 +84,17 @@ updateStateFromWeather(){
     })
   }
 
-  getGeoLoc=(event)=>{
-      event.preventDefault();
-      console.log(event)
-
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(function(position) {
+getGeoLoc=(event)=>{
+      // event.preventDefault();
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition( function (position) {
           const location = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-          console.log(location);
 
+this.setState({geolocation:location });
+this.getGeoWeather();
         }.bind(this), function() {
           alert('Not able to find your location');
         });
@@ -110,7 +109,32 @@ updateCity=(cityName)=>{
   this.setState({city: cityName});
 }
 
+getGeoWeather=async()=>{
+  const location=this.state.geolocation;
 
+  const lat=location.lat ;
+
+  const long=location.lng ;
+
+ const latLongURL=`/weather/geo/${lat}/${long}/${weatherApi_key}`;
+
+   const weatherReq= await fetch(latLongURL).then(res=>{
+            if(res.ok){
+               return res.json();
+
+            }else{
+              this.setState({error: "Error retrieving weather data"});
+            }
+          }).then(weatherRes=>{
+            this.setState({weather:weatherRes})
+            this.setState({error: ""});
+            this.updateStateFromWeather();
+          }).catch(error=>{
+            this.setState({error: error.message})
+          });
+
+
+}
 
  render(){
 
