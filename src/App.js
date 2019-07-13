@@ -1,4 +1,6 @@
 import React from 'react';
+import Unsplash from 'unsplash-js';
+// const Unsplash = require('unsplash-js').default;
 import SearchBox from"./components/SearchBox";
 import Error from"./components/Error";
 import Title from"./components/Title";
@@ -8,7 +10,10 @@ import './App.css';
 
 
 const weatherApi_key="d1169d1918f632fcc4c5ca02b739acf9";
-
+const unsplash = new Unsplash({
+  applicationId: "b8310c0bc53aa73155119b6b7a42b43ff912eca5967e16c0568ea14fee4d815c",
+  secret: "be121636c19b571fbc749d269dd95dcbc5758272b71a6900d74e029fb80acbab"
+});
 
 class App extends React.Component {
 
@@ -21,7 +26,7 @@ state={
   humidity: undefined,
   weather: null,
   geolocation:null,
-  isLoading:false,
+  style: null,
   error:undefined
 }
 
@@ -46,6 +51,7 @@ if(city&&country){
              this.setState({weather:weatherRes})
              this.setState({error: ""});
              this.updateStateFromWeather();
+             this.getRandomBackground();
            }).catch(error=>{
              this.setState({error: error.message})
            });
@@ -60,6 +66,7 @@ if(city&&country){
              this.setState({weather:weatherRes})
              this.setState({error: ""});
              this.updateStateFromWeather();
+             this.getRandomBackground();
            }).catch(error=>{
              this.setState({error: error.message})
            });
@@ -129,6 +136,7 @@ getGeoWeather=async()=>{
             this.setState({weather:weatherRes})
             this.setState({error: ""});
             this.updateStateFromWeather();
+            this.getRandomBackground();
           }).catch(error=>{
             this.setState({error: error.message})
           });
@@ -137,26 +145,24 @@ getGeoWeather=async()=>{
 
 
 getRandomBackground=async()=>{
-
-
   const keyWord = this.state.forecast;
   const imageURL= `/photos/random/${keyWord}`;
 
-  const imageReq= await fetch(imageURL).then(res=>{
-           if(res.ok){
-              return res.json();
-
-           }else{
-             this.setState({error: "Error retrieving weather data"});
-           }
-         }).then(imageRes=>{
-           // return imageRes;
-           console.log(imageRes);
-         }).catch(error=>{
-           this.setState({error: error.message})
-         });
-
-
+         unsplash.photos.getRandomPhoto({ query: keyWord })
+           .then(res=>{
+             if(res.ok){
+               return res.json();
+             }
+           })
+           .then(imageRes => {
+             const url= imageRes.urls.regular;
+             const style={
+               backgroundImage: `url(${url})`
+             }
+             this.setState({style: style})
+           }).catch(error=>{
+                  this.setState({error: error.message})
+                });
 
 
 
@@ -164,14 +170,17 @@ getRandomBackground=async()=>{
 }
 
 
+
+
  render(){
+
    return(
      <div>
          <div id="title-container">
             <Title/>
          </div>
-         <div id="image-container">
-             <div className="searchBoxDiv">
+         <div id="image-container" style ={this.state.style}>
+             <div id="searchBoxDiv">
                   <SearchBox getWeather={this.getWeather} updateCity={this.updateCity}/>
              </div>
 

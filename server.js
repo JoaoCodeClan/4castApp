@@ -38,10 +38,13 @@ server.get('/weather/geo/:lat/:long/:weatherApi_key', function(req,res){
             res.send();
             return;
           }
-        
+
           res.send(body);
         });
 });
+
+
+
 
 
 
