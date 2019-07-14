@@ -2,7 +2,7 @@ import React from "react";
 import '../App.css';
 
 const Error=props=>(
-<div>
+<div >
   <h2>{props.error}</h2>
 
 </div>

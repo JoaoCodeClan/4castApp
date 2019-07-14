@@ -14,6 +14,8 @@ const unsplash = new Unsplash({
   secret: "be121636c19b571fbc749d269dd95dcbc5758272b71a6900d74e029fb80acbab"
 });
 
+
+
 class App extends React.Component {
 
 state={
@@ -53,6 +55,7 @@ if(city&&country){
              this.getRandomBackground();
            }).catch(error=>{
              this.setState({error: "Error collecting data: "+error.message})
+
            });
 }else if(city && !country){
   const weatherReq= await fetch(serverURL1).then(res=>{
@@ -68,6 +71,7 @@ if(city&&country){
              this.getRandomBackground();
            }).catch(error=>{
              this.setState({error: "Error collecting data: "+error.message})
+
            });
 }else{
   this.setState({error: "Please enter a city"})
@@ -138,6 +142,7 @@ getGeoWeather=async()=>{
             this.getRandomBackground();
           }).catch(error=>{
             this.setState({error: "Error collecting data: "+error.message})
+
           });
 }
 
@@ -160,6 +165,7 @@ getRandomBackground=async()=>{
              this.setState({style: style})
            }).catch(error=>{
                   this.setState({error: "Error collecting data: "+error.message})
+
                 });
 }
 
@@ -168,27 +174,44 @@ getRandomBackground=async()=>{
 
  render(){
 
+
+
    return(
-     <div id="content-container" style ={this.state.style}>
-         <div id="title-container">
-            <Title/>
-         </div>
-         <div id="image-container" >
-             <div id="searchBoxDiv">
-                  <SearchBox getWeather={this.getWeather} updateCity={this.updateCity}/>
-             </div>
+        <div>
+        <div id="content-container" style ={this.state.style} >
+            <div id="title-container">
+               <Title/>
+            </div>
+            <div id="elements-container"  >
+                <div id="searchBoxDiv">
+                     <SearchBox getWeather={this.getWeather} updateCity={this.updateCity}/>
+                </div>
 
-             <div id="aroundMecontainer">
-                  {this.state.city ? null : <AroundMe findLocation={this.getGeoLoc}/>}
-             </div>
+                <div id="aroundMecontainer">
+                     {this.state.city ? null : <AroundMe findLocation={this.getGeoLoc}/>}
+                </div>
 
-             <div id="Result-container">
-                  { this.state.forecast ? <ResultTable forecast={this.state.forecast} description={this.state.description} temperature={this.state.temperature} humidity={this.state.humidity}/> : null }
-                  <Error error={this.state.error}/>
-             </div>
-         </div>
+                <div id="Result-container">
+                     { this.state.forecast ? <ResultTable forecast={this.state.forecast} description={this.state.description} temperature={this.state.temperature} humidity={this.state.humidity}/> : null }
+                    <div id="error-container">
+                      <Error error={this.state.error}/>
+                    </div>
+                </div>
+            </div>
 
-     </div>
+        </div>
+
+
+
+
+        </div>
+
+
+
+
+
+
+
    );
  }
 
